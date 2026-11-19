@@ -1,2 +1,2 @@
- console.log('Hello world');
+ console.log('Hello jenkins');
  console.log('feature 1 added');
