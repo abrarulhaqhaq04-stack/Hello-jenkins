@@ -23,7 +23,7 @@ pipeline {
                 expression {  params.RUN_TESTS == true}
             }
             steps {
-                echo 'Running tests...'
+                echo " Test started by ${params.USER_NAME} "
                 sh 'sh test.sh'
             }
         }
