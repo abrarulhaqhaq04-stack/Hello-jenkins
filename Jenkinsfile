@@ -19,7 +19,7 @@ pipeline {
             }
         }
         stage('Test') {
-            When {
+            when {
                 expression {  params.RUN_TESTS == true}
             }
             steps {
