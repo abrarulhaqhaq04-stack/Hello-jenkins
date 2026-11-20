@@ -1,39 +1,35 @@
 pipeline {
     agent any
+
+    environment {
+        APP_NAME = 'my-app'
+        VERSION = '1.0'
+    }
     stages {
         stage('checkout') {
             steps {
-                echo ' pulled code from github'
+                echo "Building ${APP_NAME} version ${VERSION}"
                 sh 'ls'
             }
-            stage('Test') {
-                steps {
-                    echo "Running test cases"
-                    sh ' sh test.sh'
-                  
-                }
+        }
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'sh test.sh'
             }
-            stage('Build') {
-                steps {
-                    echo "Building the code"
-                }
+        }
+        stage('Deploy') {
+            steps {
+               echo "Deploying ${APP_NAME} "
             }
-            stage('Deploy') {
-                steps {
-                    echo "Deploying the code"
-                }
+        }
+        stage('Info') {
+            steps {
+                echo "Build number: ${env.BUILD_NUMBER}"
+                echo "Job name: ${env.JOB_NAME}"
+                echo "workspace: ${env.WORKSPACE}"
             }
-            post {
-                always {
-                    echo "This will always run"
-                }
-                success {
-                    echo "This will run only if successful"
-                }
-                failure {
-                    echo "This will run only if failed"
-                }
-            }
+
         }
     }
 }
