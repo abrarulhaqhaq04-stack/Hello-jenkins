@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'USER_NAME', defaultValue: 'student', description: 'who is running the build')
+        choice(name: 'ENVIRONMENT', choices: ['dev', 'staging', 'prod'], description: 'where to deploy')
+        booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run tests before deployment?')
+    }
+
     environment {
         APP_NAME = 'my-app'
         VERSION = '1.0'
@@ -13,6 +19,9 @@ pipeline {
             }
         }
         stage('Test') {
+            When {
+                expression {  params.RUN_TESTS == true}
+            }
             steps {
                 echo 'Running tests...'
                 sh 'sh test.sh'
@@ -20,7 +29,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-               echo "Deploying ${APP_NAME} "
+               echo "Deploying to ${params.ENVIRONMENT} "
             }
         }
         stage('Info') {
