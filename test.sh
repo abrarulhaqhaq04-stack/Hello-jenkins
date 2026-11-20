@@ -1,5 +1,5 @@
 #!/bin/sh
-if grep -q "Hello jenki" app.js; then
+if grep -q "Hello Docker" app.js; then
 echo "Test passed"
 exit 0
 else
