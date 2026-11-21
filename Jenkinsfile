@@ -40,5 +40,12 @@ pipeline {
             }
 
         }
+        stage('use secret') {
+            steps {
+                withCredentials([string(credentialsId: 'demo-secret', variable: 'MY_SECRET')]) {
+                    sh 'echo "secret length: ${#MY_SECRET}"'
+                    sh 'echo "secret value: $MY_SECRET"'
+            }
+        }
     }
 }
