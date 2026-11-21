@@ -50,8 +50,8 @@ pipeline {
     }
     stage('use login') {
         steps {
-            withcredentials([usernamePassword(credentialsId: '1010', usernameVariable: 'demo-login', passwordVariable: 'PASS')]) {
-              sh 'echo "login: $demo-login"'
+            withcredentials([usernamePassword(credentialsId: 'demo-login', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+              sh 'echo "login: $USER"'
             }
         }
     }
