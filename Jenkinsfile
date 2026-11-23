@@ -52,7 +52,7 @@ pipeline {
         steps {
             withCredentials([usernamePassword(credentialsId: 'demo-login', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
               sh 'echo "login in as  $USER"'
-              echo "code is completed"
+              echo "code is completed successfully"
             }
         }
     }
